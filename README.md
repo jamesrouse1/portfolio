@@ -3,7 +3,7 @@
 Welcome to my data science portfolio! This repository showcases two of my data science projects, each addressing unique and interesting challenges. Below, you'll find a brief overview of each project along with the libraries used in Python and R.
 
 
-## Project 1: Predicting Player Performance in Baseball (Python)
+# Project 1: Predicting Player Performance in Baseball (Python)
 
 ### Overview
 **Description:** In this project, I focused on predicting player performance in baseball, particularly their ability to drive in runs (RBIs). I collected hitting data for individual players and conducted exploratory data analysis (EDA) to understand the relationships between player statistics and RBIs.
@@ -37,8 +37,7 @@ To view the IPython Notebook and its rendered content, simply click on the file:
 
 GitHub will automatically render the IPython Notebook, allowing you to see the code, visualizations, and markdown cells directly in your browser.
 
-## Real-World Applications
-## Project 2: Kidney Stone Prediction (R)
+# Project 2: Kidney Stone Prediction (R)
 
 ### Overview
 **Description:** This project focuses on predicting kidney stone presence based on urine data. Kidney stones are a painful health issue, and early detection can be crucial. I collected and cleaned a dataset containing urine characteristics and kidney stone diagnoses. After data cleaning, I conducted exploratory data analysis (EDA) to gain insights into the data's characteristics.
