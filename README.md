@@ -33,7 +33,7 @@ The data for this project is located in the batting folder of this repository. T
 
 To view the IPython Notebook and its rendered content, simply click on the file:
 
-- [predicting_rbis.ipynb](predicting_rbis.ipynb)
+- [predicting_rbis.ipynb](rbi_project/predicting_rbis.ipynb)
 
 GitHub will automatically render the IPython Notebook, allowing you to see the code, visualizations, and markdown cells directly in your browser.
 
