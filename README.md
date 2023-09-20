@@ -23,7 +23,7 @@ Welcome to my data science portfolio! This repository showcases two of my data s
 ### Project Goal
 The project aims to provide insights into the factors influencing a player's ability to contribute to offensive success in baseball, specifically in terms of RBIs.
 
-# Data
+## Data
 The data for this project is located in the batting folder of this repository. The module pybaseball was also used to obtain data.
 
 
@@ -54,6 +54,9 @@ GitHub will automatically render the IPython Notebook, allowing you to see the c
 - Employed logistic regression for binary classification, emphasizing model evaluation metrics like accuracy, specificity, sensitivity, and ROC curves.
 - Introduced K-Nearest Neighbors (KNN) for predictive modeling.
 - Emphasized clear and informative data visualization throughout the project.
+
+## Data
+The data for this project is in the file kidney_stone.csv, which is located in this repository. 
 
 ### Project Goal
 The primary goal of this project is to create a practical tool for early kidney stone detection and intervention.
