@@ -1,9 +1,7 @@
 ---
 title: "Kidney Stone Predicion"
 author: "James Rouse"
-output:
-  html_document: default
-  pdf_document: default
+output: rmarkdown::github_document
 ---
 
 This is a project about kidney stones, a painful health issue. By looking at data about different aspects of urine, I want to make a computer program that can predict if someone has kidney stones or not.
