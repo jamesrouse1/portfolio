@@ -65,8 +65,8 @@ The primary goal of this project is to create a practical tool for early kidney 
 
 To view the R Markdown project and its output, you'll need to download the HTML file:
 
-1. Navigate to the R Markdown file:
-   - [kidney_stone_detection.html](kidney_stone_detection.html)
+1. Navigate to the html file:
+   - [kidney_stone_detection.html](kidney_stone_project/kidney_stone_detection.html)
 
 2. Click on the file name to open it.
 
