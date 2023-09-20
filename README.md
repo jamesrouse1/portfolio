@@ -2,6 +2,31 @@
 
 Welcome to my data science portfolio! This repository showcases two of my data science projects, each addressing unique and interesting challenges. Below, you'll find a brief overview of each project along with the libraries used in Python and R.
 
+## How to View Project
+
+### IPython Notebook (ipynb)
+
+To view the IPython Notebook and its rendered content, simply click on the file:
+
+- [predicting_rbis.ipynb](predicting_rbis.ipynb)
+
+GitHub will automatically render the IPython Notebook, allowing you to see the code, visualizations, and markdown cells directly in your browser.
+
+### R Markdown (Rmd)
+
+To view the R Markdown project and its output, you'll need to download the HTML file:
+
+1. Navigate to the R Markdown file:
+   - [kidney_stone_detection.Rmd](kidney_stone_detection.Rmd)
+
+2. Click on the file name to open it.
+
+3. In the top right corner of the R Markdown file view, you'll find a "Download" button. Click it to download the HTML file.
+
+4. Once downloaded, open the HTML file in your web browser to view the project's content and visualizations.
+
+Enjoy exploring the project!
+
 ## Project 1: Predicting Player Performance in Baseball (Python)
 
 ### Overview
