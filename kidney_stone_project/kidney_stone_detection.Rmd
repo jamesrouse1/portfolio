@@ -1,25 +1,50 @@
 ---
-title: "Kidney Stone Predicion"
+title: "Kidney Stone Prediction"
 author: "James Rouse"
-output: rmarkdown::github_document
+output:
+  rmarkdown::github_document: default
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
 
-This is a project about kidney stones, a painful health issue. By looking at data about different aspects of urine, I want to make a computer program that can predict if someone has kidney stones or not.
+This project focuses on predicting kidney stones based on urine data, including urine specific gravity, urine pH, and other relevant factors. The aim is to develop a predictive tool that can identify the likelihood of kidney stones early on, facilitating timely medical intervention.
 
-Imagine if we could tell early on whether someone might get kidney stones based on urine data. It could help doctors take action before things get worse. That's what we're trying to do with this project.
+### Steps and Methodology
 
-We'll look at information such as the urine specific gravity, urine pH, and other factors that might be linked to kidney stones. Then, we'll use this information to teach the computer to make predictions.
+#### 1. Data Collection and Cleaning
+- **Data Collection**: Gather a dataset containing urine characteristics and kidney stone diagnoses (binary: positive/negative).
+- **Data Cleaning**: Address missing values, remove duplicates, and ensure consistent data formatting.
 
+#### 2. Exploratory Data Analysis (EDA)
+- **Purpose**: Understand data distributions and relationships.
+- **Visualizations**:
+  - **Box Plots**: Compare the distribution of urine characteristics between individuals with and without kidney stones.
+  - **Violin Plots**: Visualize the density of urine characteristics for both groups.
 
-We begin by collecting and cleaning a dataset containing relevant urine characteristics and kidney stone diagnoses (binary: positive/negative). After data cleaning, we conduct exploratory data analysis (EDA) to gain insights into data distributions and relationships. This includes using box plots and violin plots to visualize variations in urine characteristics between individuals with and without kidney stones.
+#### 3. Model Development
+- **Logistic Regression**:
+  - **Feature Selection**: Identify important features based on EDA findings.
+  - **Data Split**: Divide the data into training and testing sets.
+  - **Training**: Develop a logistic regression model using the training data.
+  - **Evaluation**: Assess model performance using metrics such as accuracy, specificity, sensitivity, and ROC curves.
 
-For model development, we start with logistic regression, a suitable method for binary classification. We select important features based on EDA findings, split the data into training and testing sets, and train the logistic regression model. Model evaluation focuses on specific metrics, including accuracy, specificity, sensitivity, and ROC curves.
+#### 4. Exploring Additional Models
+- **K-Nearest Neighbors (KNN)**:
+  - **Hyperparameter Tuning**: Optimize KNN parameters to improve performance.
+  - **Comparison**: Evaluate KNN performance relative to logistic regression.
+- **Random Forest**:
+  - **Development**: Build a robust classifier using the Random Forest algorithm.
+  - **Feature Importance**: Analyze which features are most influential in predictions.
 
-To further explore predictive models, we introduce K-Nearest Neighbors (KNN) and Random Forest. We customize KNN through hyperparameter tuning and assess its performance relative to logistic regression. Additionally, we utilize Random Forest to build a robust classifier and examine feature importance.
+#### 5. Data Visualization
+- **Objective**: Create clear and informative visualizations to interpret model results effectively.
+- **Tools**: Use visualizations to help understand the significance of different urine characteristics in predicting kidney stones.
 
-Our emphasis remains on data visualization, with the aim of creating clear and informative visualizations to help interpret model results.
+### Summary
+This project integrates data analysis, model development, and evaluation with a focus on key performance metrics. The ultimate goal is to create a practical tool for early detection and intervention of kidney stones based on urine data.
 
-In summary, this project combines data analysis, model development, and evaluation with a specific focus on key performance metrics. The goal is to create a practical tool for early kidney stone detection and intervention.
+By following this structured approach, I aim to develop a reliable predictive model that can assist in identifying individuals at risk of kidney stones, potentially improving patient outcomes through early intervention.
 
 
 Packages were installed. 
@@ -98,7 +123,7 @@ The histogram of the target variable reveals a distribution of approximately 45 
 
 The correlation matrix reveals how variables are related. Some have weak correlation, like conductivity (cond) and pH, or calcium content (calc) and pH. Others, like specific gravity and osmolality (osmo), or urea and specific gravity, show strong correlation.
 
-These correlations impact our modeling approach. Weak correlations suggest that variables like conductivity or calcium might have independent effects on kidney stone prediction. Strong correlations imply shared information between variables like gravity and osmolality, potentially aiding modeling accuracy by considering these pairs together. Selecting features strategically based on correlation insights can help build a more effective predictive model for identifying kidney stone presence.
+These correlations impact the modeling approach. Weak correlations suggest that variables like conductivity or calcium might have independent effects on kidney stone prediction. Strong correlations imply shared information between variables like gravity and osmolality, potentially aiding modeling accuracy by considering these pairs together. Selecting features strategically based on correlation insights can help build a more effective predictive model for identifying kidney stone presence.
 
 **Creating boxplots and violin plots for all of the variables.**
 ```{r}
@@ -150,11 +175,11 @@ The box plots and violin plots offer a visual understanding of how each variable
 
 These observations derived from the box plots and violin plots offer preliminary insights into the potential relationships between these variables and kidney stone occurrence. Further analysis and modeling will be critical to quantitatively establish the significance of these trends for accurate predictive modeling.
 
-The combination of violin plots and box plots enhances our understanding of the dataset's patterns in relation to kidney stone presence. Box plots offer a quick snapshot of key statistics like medians and quartiles, while violin plots provide a more detailed distribution view, highlighting data density and shape.
+The combination of violin plots and box plots enhances understanding of the dataset's patterns in relation to kidney stone presence. Box plots offer a quick snapshot of key statistics like medians and quartiles, while violin plots provide a more detailed distribution view, highlighting data density and shape.
 
-In our analysis, these dual plots uncover subtle shifts in medians, like those seen in specific gravity and pH. Additionally, violin plots emphasize density around specific values, such as osmolality above 750 and conductivity below 20, providing insights into potential thresholds indicative of kidney stone presence.
+In the analysis, these dual plots uncover subtle shifts in medians, like those seen in specific gravity and pH. Additionally, violin plots emphasize density around specific values, such as osmolality above 750 and conductivity below 20, providing insights into potential thresholds indicative of kidney stone presence.
 
-By leveraging both visualizations, we gain a comprehensive perspective on the dataset's characteristics. This aids in selecting predictive features and identifying influential variables, contributing to well-informed decisions in subsequent project stages.
+By leveraging both visualizations, it gives a comprehensive perspective on the dataset's characteristics. This aids in selecting predictive features and identifying influential variables, contributing to well-informed decisions in subsequent project stages.
 
 **Creating Scatter Plots**
 ```{r}
@@ -183,13 +208,13 @@ The benefit of utilizing scatter plots lies in their ability to offer a visual r
 
 
 
-In preparation for subsequent modeling, we have undertaken the crucial step of identifying and removing outliers from the dataset across all variables. Outliers are data points that deviate significantly from the general pattern exhibited by the majority of the data. These exceptional values, while sometimes reflective of real-world anomalies, can unduly influence the outcomes of statistical analysis and predictive modeling.
+In preparation for subsequent modeling, I have undertaken the crucial step of identifying and removing outliers from the dataset across all variables. Outliers are data points that deviate significantly from the general pattern exhibited by the majority of the data. These exceptional values, while sometimes reflective of real-world anomalies, can unduly influence the outcomes of statistical analysis and predictive modeling.
 
-By removing outliers, we aim to enhance the robustness and reliability of our models. Outliers have the potential to skew statistical measures such as means, standard deviations, and correlations, thus distorting the insights drawn from the data. In the context of predictive modeling, the presence of outliers can lead to models that are overly sensitive to extreme values, resulting in reduced generalization to unseen data.
+By removing outliers, I aim to enhance the robustness and reliability of the models. Outliers have the potential to skew statistical measures such as means, standard deviations, and correlations, thus distorting the insights drawn from the data. In the context of predictive modeling, the presence of outliers can lead to models that are overly sensitive to extreme values, resulting in reduced generalization to unseen data.
 
-Removing outliers allows our models to capture the more representative patterns and relationships within the data, leading to more accurate and dependable predictions. It also contributes to the assumption of normality and homoscedasticity, both of which are often prerequisites for many modeling techniques.
+Removing outliers allows the models to capture the more representative patterns and relationships within the data, leading to more accurate and dependable predictions. It also contributes to the assumption of normality and homoscedasticity, both of which are often prerequisites for many modeling techniques.
 
-By taking this step of outlier removal, we are not only ensuring the integrity of our modeling process but also increasing the likelihood of uncovering meaningful insights from the data. This refinement is a critical stage in the data preprocessing pipeline, setting the stage for more robust and reliable modeling outcomes.
+By taking this step of outlier removal, I am not only ensuring the integrity of the modeling process but also increasing the likelihood of uncovering meaningful insights from the data. This refinement is a critical stage in the data preprocessing pipeline, setting the stage for more robust and reliable modeling outcomes.
 
 **Removing Outliers**
 ```{r}
@@ -221,7 +246,7 @@ Upon filtering the dataset, the resulting 'filtered_kidney_df' contains 72 rows,
 
 **Feature Engineering**
 
-Given the high multicollinearity observed between the variables 'osmo' (osmolality) and 'gravity,' it becomes essential to address this issue before proceeding with further analysis. High multicollinearity can make it challenging to interpret the individual effects of correlated variables and might lead to unstable model estimates. Additionally, in pursuit of dimensionality reduction to enhance the efficiency and interpretability of our analysis, we aim to engineer a new variable that captures the relationship between 'osmo' and 'gravity.' This variable, denoted as 'osmo_to_gravity_ratio,' represents the ratio of osmolality to gravity levels. By creating this engineered feature, we can potentially mitigate the multicollinearity concern while still retaining relevant information about the relationship between these variables. This step aligns with our strategy to balance the inclusion of informative features with the need for a more manageable and interpretable dataset.
+Given the high multicollinearity observed between the variables 'osmo' (osmolality) and 'gravity,' it becomes essential to address this issue before proceeding with further analysis. High multicollinearity can make it challenging to interpret the individual effects of correlated variables and might lead to unstable model estimates. Additionally, in pursuit of dimensionality reduction to enhance the efficiency and interpretability of the analysis, I aim to engineer a new variable that captures the relationship between 'osmo' and 'gravity.' This variable, denoted as 'osmo_to_gravity_ratio,' represents the ratio of osmolality to gravity levels. By creating this engineered feature, I can potentially mitigate the multicollinearity concern while still retaining relevant information about the relationship between these variables. This step aligns with a strategy to balance the inclusion of informative features with the need for a more manageable and interpretable dataset.
 ```{r}
 # Assuming you have the filtered_kidney_df data frame
 
@@ -233,15 +258,15 @@ filtered_kidney_df$osmo_to_gravity_ratio <- filtered_kidney_df$osmo / filtered_k
 head(filtered_kidney_df)
 ```
 
-Our analysis is geared towards developing a predictive model for the detection of kidney stones using logistic regression. Logistic regression is a widely used technique for binary classification tasks like ours. It aims to model the relationship between input variables and the likelihood of a binary outcome—in this case, the presence or absence of kidney stones.
+This analysis is geared towards developing a predictive model for the detection of kidney stones using logistic regression. Logistic regression is a widely used technique for binary classification tasks like this. It aims to model the relationship between input variables and the likelihood of a binary outcome—in this case, the presence or absence of kidney stones.
 
-Due to the limited size of our dataset, consisting of just 72 rows, employing a traditional train-test split for validation poses challenges. Ideally, we would prefer to have a larger dataset to ensure a robust and accurate assessment of model performance. The train-test split allows us to evaluate how well the model generalizes to new, unseen data. However, with our limited dataset, splitting it into separate training and testing subsets could potentially result in even smaller subsets that might not adequately represent the underlying patterns and variability of the data.
+Due to the limited size of the dataset, consisting of just 72 rows, employing a traditional train-test split for validation poses challenges. Ideally, I would prefer to have a larger dataset to ensure a robust and accurate assessment of model performance. The train-test split allows us to evaluate how well the model generalizes to new, unseen data. However, with the limited dataset, splitting it into separate training and testing subsets could potentially result in even smaller subsets that might not adequately represent the underlying patterns and variability of the data.
 
-Therefore, while it's not the ideal scenario, we have opted to perform a single logistic regression model without splitting the data initially. This approach allows us to capture the relationships between input variables and the target variable within the confines of our dataset. Our intent here is to obtain a preliminary understanding of how the model performs on the available data.
+Therefore, while it's not the ideal scenario, I have opted to perform a single logistic regression model without splitting the data initially. This approach allows us to capture the relationships between input variables and the target variable within the confines of our dataset. Our intent here is to obtain a preliminary understanding of how the model performs on the available data.
 
-In subsequent steps, we will leverage cross-validation techniques to address the limitations of the single model approach. Cross-validation involves partitioning the data into multiple folds to iteratively train and validate the model. This approach provides a more accurate estimate of the model's performance and helps mitigate the risk of overfitting to the small dataset. Metrics such as accuracy and a confusion matrix will provide insights into how well the model is performing.
+In subsequent steps, I will leverage cross-validation techniques to address the limitations of the single model approach. Cross-validation involves partitioning the data into multiple folds to iteratively train and validate the model. This approach provides a more accurate estimate of the model's performance and helps mitigate the risk of overfitting to the small dataset. Metrics such as accuracy and a confusion matrix will provide insights into how well the model is performing.
 
-While the size of our dataset presents certain challenges, our methodology allows us to make the best use of the available data to develop an informative and reliable predictive model for kidney stone detection.
+While the size of the dataset presents certain challenges, the methodology allows us to make the best use of the available data to develop an informative and reliable predictive model for kidney stone detection.
 
 **Logistic Regression Model**
 All variables, including the engineered variable, were used in this model.
@@ -277,13 +302,13 @@ conf_matrix <- confusionMatrix(predicted_classes, data_subset$target)
 print(conf_matrix)
 plot(conf_matrix$table, col = c("red", "green"), main = "Confusion Matrix")
 ```
-In our pursuit of developing a robust predictive model for kidney stone detection, we recognize the importance of accurate model evaluation. To achieve this, we are employing a technique known as k-fold cross-validation.
+In the pursuit of developing a robust predictive model for kidney stone detection, I recognize the importance of accurate model evaluation. To achieve this, I am employing a technique known as k-fold cross-validation.
 
 K-fold cross-validation involves partitioning the dataset into 'k' subsets or folds. The model is then trained 'k' times, each time using 'k-1' folds for training and the remaining fold for validation. This process is repeated 'k' times, with each fold serving as the validation set exactly once. The results from these iterations are averaged to provide a more accurate and representative estimate of the model's performance.
 
-While k-fold cross-validation is a powerful approach, its efficacy can be compromised by the size of the dataset. In our case, the relatively small dataset of 72 rows introduces a challenge. With limited data available, splitting it into multiple folds might result in subsets that are too small to capture the full variability and patterns within the data. This could potentially lead to less reliable estimates of the model's performance.
+While k-fold cross-validation is a powerful approach, its efficacy can be compromised by the size of the dataset. In this case, the relatively small dataset of 72 rows introduces a challenge. With limited data available, splitting it into multiple folds might result in subsets that are too small to capture the full variability and patterns within the data. This could potentially lead to less reliable estimates of the model's performance.
 
-Despite this challenge, cross-validation remains a valuable strategy. By utilizing cross-validation, we gain insights into how well the model generalizes to unseen data, even when training on a small dataset. Cross-validation helps us mitigate overfitting—where the model learns the training data too well but fails to perform well on new data. Additionally, cross-validation provides a more comprehensive assessment of the model's strengths and weaknesses across different subsets of the data.
+Despite this challenge, cross-validation remains a valuable strategy. By utilizing cross-validation, it provides insights into how well the model generalizes to unseen data, even when training on a small dataset. Cross-validation helps us mitigate overfitting—where the model learns the training data too well but fails to perform well on new data. Additionally, cross-validation provides a more comprehensive assessment of the model's strengths and weaknesses across different subsets of the data.
 
 **Cross-validation for logistic regression model 1**
 ```{r}
@@ -321,13 +346,13 @@ logistic_reg_results <- logistic_reg_results[selected_columns]
 logistic_reg_results
 ```
 
-Upon initial implementation of the logistic regression model, we obtained an accuracy of 0.69 in predicting kidney stone outcomes. While this accuracy indicates a reasonable performance, we are committed to refining the model to achieve even better results. As such, we are exploring the removal of certain variables from the model to potentially enhance its predictive capabilities.
+Upon initial implementation of the logistic regression model, there was obtained an accuracy of 0.69 in predicting kidney stone outcomes. 
 
-Our decision to consider the removal of the 'pH' and 'Conductivity' variables is based on the insights gained from earlier visualization. The scatter plots of these variables against the target variable did not exhibit clear trends or patterns, suggesting that their influence on kidney stone outcomes might be relatively limited compared to other variables. By removing these variables, we aim to simplify the model while retaining those features that have a more pronounced impact on predicting kidney stone presence or absence.
+The decision to consider the removal of the 'pH' and 'Conductivity' variables is based on the insights gained from earlier visualization. The scatter plots of these variables against the target variable did not exhibit clear trends or patterns, suggesting that their influence on kidney stone outcomes might be relatively limited compared to other variables. By removing these variables, the goal is to simplify the model while retaining those features that have a more pronounced impact on predicting kidney stone presence or absence.
 
-Simplifying the model in this manner has several potential benefits. First, it can reduce the risk of overfitting, where the model learns noise from the data rather than true patterns. Second, by focusing on variables with stronger associations, we could potentially improve the model's ability to distinguish between positive and negative kidney stone cases. Lastly, a simpler model can be more interpretable, making it easier to extract meaningful insights and draw conclusions about the relationships between the variables and the target.
+Simplifying the model in this manner has several potential benefits. First, it can reduce the risk of overfitting, where the model learns noise from the data rather than true patterns. Second, by focusing on variables with stronger associations, I could potentially improve the model's ability to distinguish between positive and negative kidney stone cases. Lastly, a simpler model can be more interpretable, making it easier to extract meaningful insights and draw conclusions about the relationships between the variables and the target.
 
-In summary, the decision to remove the 'pH' and 'Conductivity' variables from the model is driven by our commitment to optimizing predictive accuracy. We believe that by streamlining the model to include the most influential variables, we can achieve a higher accuracy in predicting kidney stone outcomes and develop a more interpretable and effective tool for medical diagnosis.
+In summary, the decision to remove the 'pH' and 'Conductivity' variables from the model is driven by the goal of optimizing predictive accuracy. By streamlining the model to include the most influential variables, it can achieve a higher accuracy in predicting kidney stone outcomes and develop a more interpretable and effective tool for medical diagnosis.
 
 **Logistic Regression Model 2** 
 
@@ -402,14 +427,14 @@ During this analysis, the systematic removal of variables that displayed limited
 
 
 **Further refining feature selection**
-We wanted to assess if our engineered variable, "Osmo_to_gravity_ratio," improved our model compared to using the original variables, "osmo" and "gravity." Not all feature engineering efforts enhance models, so it's crucial to check their impact.
+In order to assess if the engineered variable, "Osmo_to_gravity_ratio," improved the model compared to using the original variables, "osmo" and "gravity." Not all feature engineering efforts enhance models, so it's crucial to check their impact.
 
-We split "Osmo_to_gravity_ratio" back into "osmo" and "gravity" to compare model performance. This allowed us to determine if the feature engineering improved accuracy or if the original variables were equally informative.
+"Osmo_to_gravity_ratio" was split back into "osmo" and "gravity" to compare model performance. This allowed us to determine if the feature engineering improved accuracy or if the original variables were equally informative.
 
 
 This experiment highlights the need to critically evaluate feature engineering choices. It helps us decide whether the engineered variable adds value or if simpler features suffice.
 
-Results will guide us in feature engineering decisions. If no significant improvement is observed, we can opt for the original variables, promoting simpler and more interpretable models.
+Results will guide us in feature engineering decisions. If no significant improvement is observed, the original variables could be used, promoting simpler and more interpretable models.
 
 **Logistic Regression Model 3**
 
@@ -482,15 +507,17 @@ logistic_reg_3_results <- logistic_reg_3_results[selected_columns]
 logistic_reg_3_results
 ```
 
-After testing the separation of the engineered variable, "Osmo_to_gravity_ratio," it became evident that this engineered feature did not improve model performance. Consequently, we will retain the variables used in the third model, which include Calcium, Urea, Osmolarity, Gravity, Target. This decision prioritizes model simplicity and interpretability, underscoring the importance of evidence-based feature engineering choices in our data analysis pipeline.
+After testing the separation of the engineered variable, "Osmo_to_gravity_ratio," it became evident that this engineered feature did not improve model performance. Consequently, variables in the third model will be retained, which include Calcium, Urea, Osmolarity, Gravity, Target. This decision prioritizes model simplicity and interpretability, underscoring the importance of evidence-based feature engineering choices in the data analysis pipeline.
 
-These variables have demonstrated the best results and will be the primary features used in our machine learning efforts. They are the leading candidates for constructing the most effective logistic regression model.
+These variables have demonstrated the best results and will be the primary features used in the machine learning efforts. They are the leading candidates for constructing the most effective logistic regression model.
 
-**Machine Learning**
-We recognize the importance of exploring diverse modeling techniques. While we've developed several logistic regression models, we're now venturing into machine learning, beginning with Random Forest. This method harnesses the power of multiple decision trees, making it well-suited for situations with limited data. Its ensemble approach enhances predictive accuracy while guarding against overfitting, making it a robust choice even in data-constrained scenarios."
+### Machine Learning
+After developing several logistic regression models, the next step is venturing into machine learning, beginning with Random Forest. This method harnesses the power of multiple decision trees, making it well-suited for situations with limited data. Its ensemble approach enhances predictive accuracy while guarding against overfitting, making it a robust choice even in data-constrained scenarios.
 
-**Random Forest**
-We will also implement the Random Forest algorithm, a powerful ensemble method that leverages multiple decision trees to improve prediction accuracy and robustness. Random Forest works by aggregating the predictions of multiple individual trees, reducing the risk of overfitting and enhancing the model's generalization capabilities.
+### Random Forest
+Implementing the Random Forest algorithm, a powerful ensemble method that leverages multiple decision trees to improve prediction accuracy and robustness, is the next step. Random Forest aggregates the predictions of multiple individual trees, reducing the risk of overfitting and enhancing the model's generalization capabilities.
+
+By incorporating Random Forest into the predictive modeling process, the goal is to build a more reliable and accurate tool for early detection of kidney stones, providing a valuable resource for medical professionals to intervene before the condition worsens.
 ```{r}
 set.seed(123)
 # Create a subset of the data frame with selected variables
@@ -523,7 +550,7 @@ random_forest_results
 The Random Forest model had very good results. Its ROC, sensitivity, and specificity were all slightly higher than the last logistic regression model.  Its success can be attributed to its ensemble learning strategy, which combines predictions from multiple decision trees, effectively enhancing predictive accuracy while guarding against overfitting. Additionally, Random Forest's feature importance analysis enables the model to prioritize crucial variables, focusing on the most informative aspects of the data. Robustness to non-linear relationships and resilience against outliers and noise further bolster its effectiveness in complex classification tasks. Notably, this model's adaptability to limited data is a standout feature, making it a valuable asset when working with constrained datasets. The model's striking similarity to the third logistic regression model, with slightly superior performance, suggests its adeptness at capturing intricate non-linear patterns in the dataset, solidifying its value in such scenarios.
 
 **K-Nearest Neighbors**
-Next, we applied K-Nearest Neighbors (KNN) to our data. KNN is a method that makes predictions based on the similarity of data points in the dataset. It's a straightforward and intuitive approach that assesses the 'closeness' of data points to make predictions.
+Next, K-Nearest Neighbors (KNN) was applied to the data. KNN is a method that makes predictions based on the similarity of data points in the dataset. It's a straightforward and intuitive approach that assesses the 'closeness' of data points to make predictions.
 ```{r}
 # Load the necessary libraries
 library(caret)
@@ -566,7 +593,7 @@ knn_results <- results_table[results_table$k == 3, c("Model", "ROC", "Sens", "Sp
 print(knn_results)
 ```
 
-The K-Nearest Neighbors (KNN) model yielded comparatively lower performance, with a maximum ROC of 0.56, sensitivity of 0.63, and specificity of 0.43. This performance lagged behind that of the logistic regression and random forest models. Several factors could contribute to this discrepancy, including the sensitivity of KNN to data scaling, potential challenges in high-dimensional spaces, and the critical choice of the number of neighbors (K). However, it's worth noting that we carefully selected the most suitable K value through experimentation. In practice, the choice of machine learning algorithm should consider the specific characteristics of the data and problem, and while KNN is interpretable and straightforward, it may not always provide the best results.
+The K-Nearest Neighbors (KNN) model yielded comparatively lower performance, with a maximum ROC of 0.56, sensitivity of 0.63, and specificity of 0.43. This performance lagged behind that of the logistic regression and random forest models. Several factors could contribute to this discrepancy, including the sensitivity of KNN to data scaling, potential challenges in high-dimensional spaces, and the critical choice of the number of neighbors (K). However, it's worth noting that I carefully selected the most suitable K value through experimentation. In practice, the choice of machine learning algorithm should consider the specific characteristics of the data and problem, and while KNN is interpretable and straightforward, it may not always provide the best results.
 
 **Final results for all models**
 ```{r}
@@ -586,14 +613,14 @@ print(combined_results)
 ```
 In this project, I conducted an exploratory data analysis (EDA) on a notably small dataset, leveraging various visualization tools like box and violin plots to gain insights and guide feature selection. The process involved the creation of multiple logistic regression models, each with distinct variables, refining and optimizing their composition along the way. Significantly, the logistic regression models exhibited progressive improvements as I fine-tuned the variable selection, ultimately leading to the removal of an engineered variable that, contrary to expectations, enhanced model performance substantially.
 
-In our pursuit of developing a predictive model for early kidney stone detection based on urine data, we employed a range of modeling techniques and diligently evaluated their performance using key metrics, including Receiver Operating Characteristic (ROC) AUC, Sensitivity (Sens), and Specificity (Spec). Here's an overview of our findings:
+In the pursuit of developing a predictive model for early kidney stone detection based on urine data, I employed a range of modeling techniques and diligently evaluated their performance using key metrics, including Receiver Operating Characteristic (ROC) AUC, Sensitivity (Sens), and Specificity (Spec). Here's an overview of the findings:
 
-**Conclusion**
+### Conclusion
 
 1. **Logistic Regression Variations**:
-   - Our exploration commenced with three distinct variations of Logistic Regression models, each offering unique insights.
+   - The exploration began with three distinct variations of Logistic Regression models, each providing unique insights.
    - **Logistic Regression 3 (Engineered Variable Removed)**: This model consistently displayed remarkable performance. After the engineered variable was removed, it achieved a robust ROC AUC of 0.814, signifying potent discriminatory capability. Notably, it struck a balance with a Sensitivity of 0.822 and Specificity of 0.580. The removal of the engineered variable streamlined its focus on informative features, likely contributing to its improved performance.
-   - **Logistic Regression 2 (Removing Feature Dimensionality by Removing Lowly Correlated Features)**: This variation demonstrated commendable results with a ROC AUC of 0.712. It was particularly strong in Sensitivity (0.842) while maintaining a Specifity of 0.540. The careful feature selection process, which involved removing lowly correlated features, may have contributed to its effectiveness.
+   - **Logistic Regression 2 (Removing Feature Dimensionality by Removing Lowly Correlated Features)**: This variation demonstrated commendable results with a ROC AUC of 0.712. It was particularly strong in Sensitivity (0.842) while maintaining a Specificity of 0.540. The careful feature selection process, which involved removing lowly correlated features, may have contributed to its effectiveness.
    - **Logistic Regression 1 (Using All Variables as well as Engineered Variable)**: While still respectable with a ROC AUC of 0.717, this model displayed a lower Sensitivity of 0.794 and Specificity of 0.533. Its inclusion of all variables, including the engineered one, may have introduced complexity that impacted its performance.
 
 2. **Random Forest**:
@@ -603,7 +630,6 @@ In our pursuit of developing a predictive model for early kidney stone detection
    - The KNN Model presented lower overall performance compared to the other models, with a ROC AUC of 0.557. This suggests less discriminative power.
    - Sensitivity (0.633) and Specificity (0.433) values indicated suboptimal performance, implying that it may not be as effective in correctly identifying individuals with and without kidney stones compared to Logistic Regression and Random Forest models.
 
-In summary, Logistic Regression 3 (after the removal of the engineered variable) and the Random Forest model emerged as the top performers in our kidney stone prediction project. While Logistic Regression 2 also demonstrated strong results, Logistic Regression 1 lagged behind slightly. The K-Nearest Neighbors (KNN) model, although part of the evaluation, displayed comparatively lower performance. The choice among these models should consider the specific requirements of your application, with the understanding that Logistic Regression 3 and Random Forest offer substantial promise for early kidney stone detection, while KNN may require further refinement or exploration of alternative techniques. Further validation and real-world testing will be instrumental in making the most informed model selection for practical clinical implementation. The Random Forest model is slightly superior to the third linear regression model, as it has higher specificity. This means that it is able to detect true negatives better than the logistic regression model.
+In summary, Logistic Regression 3 (after the removal of the engineered variable) and the Random Forest model emerged as the top performers in the kidney stone prediction project. While Logistic Regression 2 also demonstrated strong results, Logistic Regression 1 lagged behind slightly. The K-Nearest Neighbors (KNN) model, although part of the evaluation, displayed comparatively lower performance. The choice among these models should consider the specific requirements of the application, with the understanding that Logistic Regression 3 and Random Forest offer substantial promise for early kidney stone detection, while KNN may require further refinement or exploration of alternative techniques. Further validation and real-world testing will be instrumental in making the most informed model selection for practical clinical implementation. The Random Forest model is slightly superior to the third logistic regression model, as it has higher specificity, indicating better detection of true negatives compared to the logistic regression model.
 
-Looking ahead, future studies could explore the potential of larger datasets, incorporating more extensive urine readings (additional variables) and exploring further engineered features. Different modeling techniques might also warrant exploration.
-
+Looking ahead, future studies could explore the potential of larger datasets, incorporating more extensive urine readings (additional variables), and exploring further engineered features. Different modeling techniques might also warrant exploration.
