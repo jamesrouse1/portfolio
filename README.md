@@ -1,4 +1,4 @@
-# James Rouse's Data Science Portfolio
+# Machine Learning Projects
 
 Welcome to my data science portfolio! This repository showcases two of my data science projects, each addressing unique and interesting challenges. Below, you'll find a brief overview of each project along with the libraries used in Python and R.
 
